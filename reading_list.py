@@ -8,6 +8,7 @@ def add_book(title, author, year):
             writer = csv.writer(file)
             writer.writerow([title, author, year])
     except FileNotFoundError:
+        print("Error adding books")
         sys.exit()
 
 #TODO: Write a "delete_book" function
@@ -20,21 +21,29 @@ def delete_book(title, author, year):
 
 # Function to list all books
 def list_books():
-    with open('books.csv', mode='r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+    try:
+        with open('books.csv', mode='r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+    except FileNotFoundError:
+        print("Error listing books")
+        sys.exit()
 
 
 # Function to search for a book by title
 def search_book(title):
-    with open('books.csv', mode='r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[0].lower() == title.lower():
-                print(f'Found: Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
-                return
-        print('Book not found')
+    try:
+        with open('books.csv', mode='r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if row[0].lower() == title.lower():
+                    print(f'Found: Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                    return
+            print('Book not found')
+    except FileNotFoundError:
+        print("Error searching books")
+        sys.exit()
 
 
 # Menu loop
