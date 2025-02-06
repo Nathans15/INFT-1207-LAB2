@@ -3,20 +3,32 @@ import sys
 
 # Function to add a book to the reading list
 def add_book(title, author, year):
-    try:
-        with open('books.csv', mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([title, author, year])
-    except FileNotFoundError:
-        print("Error adding books")
-        sys.exit()
+        duplicate_found = False
+        try:
+            with open('books.csv', mode='r', newline='') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if title == row[0] and author == row[1] and year == row[2]:
+                        duplicate_found = True
+
+                if duplicate_found:
+                    print("Duplicate book found - Error adding books")
+                else:
+                    with open('books.csv', mode='a', newline=''):
+                        writer = csv.writer(file)
+                        writer.writerow([title, author, year])
+        except FileNotFoundError:
+            print("Error adding books")
+            sys.exit()
 
 #TODO: Write a "delete_book" function
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
-    with open('books.csv', mode='w') as file:
-        writer = csv.writer(file)
-        #write.
+    try
+        with open('books.csv', mode='w') as file:
+            writer = csv.writer(file)
+            writer.deleterow([])
+
 
 
 # Function to list all books
