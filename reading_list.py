@@ -10,7 +10,9 @@ def add_book(title, author, year):
 #TODO: Write a "delete_book" function
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
-    pass
+    with open('books.csv', mode='w') as file:
+        writer = csv.writer(file)
+        write.
 
 
 # Function to list all books
