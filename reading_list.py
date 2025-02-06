@@ -7,6 +7,11 @@ def add_book(title, author, year):
         writer = csv.writer(file)
         writer.writerow([title, author, year])
 
+#TODO: Write a "delete_book" function
+# Function to delete a book from the reading list
+def delete_book(title, author, year):
+    pass
+
 
 # Function to list all books
 def list_books():
