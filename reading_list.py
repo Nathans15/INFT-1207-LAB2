@@ -3,14 +3,27 @@ import sys
 
 # Function to add a book to the reading list
 def add_book(title, author, year):
+        # Boolean for if book the user tries
+        # to add already exists in the list
         duplicate_found = False
+
+        # Try/Except for if book file exists.
+        # Operates normally if it does, tells user
+        # an error happened adding books if not.
         try:
             with open('books.csv', mode='r', newline='') as file:
                 reader = csv.reader(file)
+                # For loop to identify possible dupilicates.
+                # If duplicate found, set duplicate_found
+                # boolean to True.
                 for row in reader:
                     if title == row[0] and author == row[1] and year == row[2]:
                         duplicate_found = True
 
+                # If statement activates after loop if duplicate_found
+                # is True, letting user know of duplicate and notifies
+                # them it cannot add the book. Else activates if
+                # duplicate_found remains False, adding book normally.
                 if duplicate_found:
                     print("Duplicate book found - Error adding books")
                 else:
