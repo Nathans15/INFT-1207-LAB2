@@ -1,18 +1,21 @@
 import csv
-
+import sys
 
 # Function to add a book to the reading list
 def add_book(title, author, year):
-    with open('books.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([title, author, year])
+    try:
+        with open('books.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([title, author, year])
+    except FileNotFoundError:
+        sys.exit()
 
 #TODO: Write a "delete_book" function
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
     with open('books.csv', mode='w') as file:
         writer = csv.writer(file)
-        write.
+        #write.
 
 
 # Function to list all books
