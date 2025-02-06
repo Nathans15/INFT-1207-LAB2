@@ -64,7 +64,7 @@ def search_book(title):
 # Menu loop
 def menu():
     while True:
-        print("\n1. Add Book\n2. Delete Books\n3. List Books\n3. Search Book\n4. Quit")
+        print("\n1. Add Books\n2. List Books\n3. Search Book\n4. Delete Books\n5. Quit")
         choice = input("Select an option: ")
 
         if choice == '1':
@@ -79,6 +79,7 @@ def menu():
             search_book(title)
         elif choice == '4':
             title = input("Enter book title to delete: ")
+        elif choice == '5':
             break
         else:
             print("Invalid choice. Try again.")
