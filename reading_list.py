@@ -24,10 +24,11 @@ def add_book(title, author, year):
             print("Error: 'books.csv' not found.")
             sys.exit()
 
-#TODO: Write a "delete_book" function
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
     books = []
+    # Boolean for checking if requested
+    # book exists to delete
     copy_found = False
     try:
         # Read book file to check for a copy of a book
@@ -48,7 +49,7 @@ def delete_book(title, author, year):
                     writer.writerows(books)
                 print("Book Removed Successfully")
             else:
-                print("Book not found")
+                print("Book not found - Error deleting book")
 
     except FileNotFoundError:
         print("Error adding books")
@@ -64,7 +65,7 @@ def list_books():
             for row in reader:
                 print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
     except FileNotFoundError:
-        print("Error listing books")
+        print("Error listing books - Books not found")
         sys.exit()
 
 
@@ -75,9 +76,9 @@ def search_book(title):
             reader = csv.reader(file)
             for row in reader:
                 if row[0].lower() == title.lower():
-                    print(f'Found: Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                    print(f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
                     return
-            print('Book not found')
+            print('Error finding book - Book not found')
     except FileNotFoundError:
         print("Error searching books")
         sys.exit()
@@ -93,17 +94,26 @@ def menu():
             title = input("Enter book title: ")
             author = input("Enter author name: ")
             year = input("Enter year of publication: ")
-            add_book(title, author, year)
+            if title == '' or author == '' or year == '':
+                print("Error adding book - Input field empty")
+            else:
+                add_book(title, author, year)
         elif choice == '2':
             list_books()
         elif choice == '3':
             title = input("Enter book title to search: ")
-            search_book(title)
+            if title == '':
+                print("Error searching for book - Input field empty")
+            else:
+                search_book(title)
         elif choice == '4':
             title = input("Enter book title: ")
             author = input("Enter author name: ")
             year = input("Enter year of publication: ")
-            delete_book(title, author, year)
+            if title == '' or author == '' or year == '':
+                print("Error deleting book - Input field empty")
+            else:
+                delete_book(title, author, year)
         elif choice == '5':
             break
         else:
