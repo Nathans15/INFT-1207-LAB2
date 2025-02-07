@@ -40,10 +40,10 @@ def delete_book(title, author, year):
                     print(books)
 
             if copy_found:
-                with open('books.csv', mode='w', newline=''):
+                with open('books.csv', mode='w', newline='') as file:
                     writer = csv.writer(file)
-                    writer.writerow(books)
-                    print("Book Removed Successfully")
+                    writer.writerows(books)  # Write the remaining books to the file
+                print("Book Removed Successfully")
             else:
                 print("Book not found")
 
