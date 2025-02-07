@@ -43,7 +43,7 @@ def add_book(title, author, year):
                     sys.exit()
 
         except ValueError:
-            print("Error adding book - Invalid year")
+            print("Error adding book - Year must be numerical")
 
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
