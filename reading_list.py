@@ -34,7 +34,7 @@ def delete_book(title, author, year):
                     copy_found = True
 
             if copy_found:
-                with open('books.csv', mode='w', newline='') as file:
+                with open('books.csv', mode='w', newline=''):
                     writer = csv.writer(file)
                     writer.writerows(books)
                     print("Book Removed Successfully")
@@ -91,7 +91,10 @@ def menu():
             title = input("Enter book title to search: ")
             search_book(title)
         elif choice == '4':
-            title = input("Enter book title to delete: ")
+            title = input("Enter book title: ")
+            author = input("Enter author name: ")
+            year = input("Enter year of publication: ")
+            delete_book(title, author, year)
         elif choice == '5':
             break
         else:
