@@ -17,24 +17,33 @@ CURRENT_YEAR = time.localtime().tm_year
 def add_book(title, author, year):
         duplicate_found = False
         try:
-            # Open file in read mode to check for duplicates
-            with open('books.csv', mode='r', newline='') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
-                        duplicate_found = True
-
-            # If no duplicate found, append the new book
-            if duplicate_found:
-                print("Duplicate book found - Error adding books")
+            if title == '' or author == '' or year == '':
+                print("Error adding book - Input field empty")
+            elif int(year) <= 0 or CURRENT_YEAR < int(year):
+                print("Error adding book - Invalid year")
             else:
-                with open('books.csv', mode='a', newline='') as file:  # Open in append mode
-                    writer = csv.writer(file)
-                    writer.writerow([title, author, year])
-                    print("Added Book Successfully")
-        except FileNotFoundError:
-            print("Error: 'books.csv' not found.")
-            sys.exit()
+                try:
+                    # Open file in read mode to check for duplicates
+                    with open('books.csv', mode='r', newline='') as file:
+                        reader = csv.reader(file)
+                        for row in reader:
+                            if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
+                                duplicate_found = True
+
+                    # If no duplicate found, append the new book
+                    if duplicate_found:
+                        print("Duplicate book found - Error adding books")
+                    else:
+                        with open('books.csv', mode='a', newline='') as file:  # Open in append mode
+                            writer = csv.writer(file)
+                            writer.writerow([title, author, year])
+                            print("Added Book Successfully")
+                except FileNotFoundError:
+                    print("Error: 'books.csv' not found.")
+                    sys.exit()
+
+        except ValueError:
+            print("Error adding book - Invalid year")
 
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
@@ -43,29 +52,35 @@ def delete_book(title, author, year):
     # book exists to delete
     copy_found = False
     try:
-        # Read book file to check for a copy of a book
-        with open('books.csv', mode='r', newline='') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
-                    copy_found = True
-                    # Append other books
-                else:
-                    books.append(row)
-                    print(books)
+        if title == '' or author == '' or year == '' or int(year) <= 0:
+            print("Error adding book - Input field empty")
+        else:
+            try:
+                # Read book file to check for a copy of a book
+                with open('books.csv', mode='r', newline='') as file:
+                    reader = csv.reader(file)
+                    for row in reader:
+                        if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
+                            copy_found = True
+                            # Append other books
+                        else:
+                            books.append(row)
+                            print(books)
 
-            if copy_found:
-                with open('books.csv', mode='w', newline='') as file:
-                    writer = csv.writer(file)
-                    # Write remaining books back to the file
-                    writer.writerows(books)
-                print("Book Removed Successfully")
-            else:
-                print("Book not found - Error deleting book")
+                    if copy_found:
+                        with open('books.csv', mode='w', newline='') as file:
+                            writer = csv.writer(file)
+                            # Write remaining books back to the file
+                            writer.writerows(books)
+                        print("Book Removed Successfully")
+                    else:
+                        print("Book not found - Error deleting book")
 
-    except FileNotFoundError:
-        print("Error adding books")
-        sys.exit()
+            except FileNotFoundError:
+                print("Error deleting books")
+                sys.exit()
+    except ValueError:
+        print("Error adding book - Invalid year")
 
 
 
@@ -84,16 +99,19 @@ def list_books():
 # Function to search for a book by title
 def search_book(title):
     try:
-        with open('books.csv', mode='r') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if row[0].lower() == title.lower():
-                    print(f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
-                    return
-            print('Error finding book - Book not found')
+        if title == '':
+            print("Error searching books - Empty input field")
+        else:
+            with open('books.csv', mode='r') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if row[0].lower() == title.lower():
+                        print(f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                        return
+                print('Error finding book - Book not found')
     except FileNotFoundError:
         print("Error searching books")
-        sys.exit()
+    sys.exit()
 
 
 # Menu loop
@@ -105,38 +123,21 @@ def menu():
         if choice == '1':
             title = input("Enter book title: ")
             author = input("Enter author name: ")
-            try:
-                year = int(input("Enter year of publication: "))
-                # If statements for checking against empty input fields
-                if title == '' or author == '' or year == '' or year <= 0:
-                    print("Error adding book - Input field empty")
-                # Elif for checking if year is valid
-                elif CURRENT_YEAR < year:
-                    print("Error adding book - Invalid year")
-                else:
-                    add_book(title, author, year)
-            except ValueError:
-                print("Error adding book - Invalid year")
+            year = input("Enter year of publication: ")
+            add_book(title, author, year)
 
         elif choice == '2':
             list_books()
 
         elif choice == '3':
             title = input("Enter book title to search: ")
-            if title == '':
-                print("Error searching for book - Input field empty")
-            else:
-                search_book(title)
+            search_book(title)
 
         elif choice == '4':
             title = input("Enter book title: ")
             author = input("Enter author name: ")
             year = input("Enter year of publication: ")
-            # If statements for checking against empty input fields
-            if title == '' or author == '' or year == '':
-                print("Error deleting book - Input field empty")
-            else:
-                delete_book(title, author, year)
+            delete_book(title, author, year)
 
         elif choice == '5':
             break

@@ -16,6 +16,9 @@ class TestReadingList(unittest.TestCase):
         search_book("Moby Dick")
         # Assert the output of the search
 
+    def test_year_ahead(self):
+        add_book("2084", "jon Orwell", 2084)
+
     # More test cases to be added...
 
 
