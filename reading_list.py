@@ -1,5 +1,17 @@
 import csv
 import sys
+import time
+# Time is imported for year-checking, to make sure the user
+# Cannot enter a year that hasn't been reached.
+
+# Date: February 7th, 2025
+# Authors: Spiro Kontossoros, Nathan Sheldrake
+# Student IDs: 100843569 (Kontossoros), 100964827 (Sheldrake)
+# Description: A library program that allows the user to add books,
+# delete them, search for a specific book and list the entire library.
+
+# Constant for the current year
+CURRENT_YEAR = time.localtime().tm_year
 
 # Function to add a book to the reading list
 def add_book(title, author, year):
@@ -93,27 +105,39 @@ def menu():
         if choice == '1':
             title = input("Enter book title: ")
             author = input("Enter author name: ")
-            year = input("Enter year of publication: ")
-            if title == '' or author == '' or year == '':
-                print("Error adding book - Input field empty")
-            else:
-                add_book(title, author, year)
+            try:
+                year = int(input("Enter year of publication: "))
+                # If statements for checking against empty input fields
+                if title == '' or author == '' or year == '' or year <= 0:
+                    print("Error adding book - Input field empty")
+                # Elif for checking if year is valid
+                elif CURRENT_YEAR < year:
+                    print("Error adding book - Invalid year")
+                else:
+                    add_book(title, author, year)
+            except ValueError:
+                print("Error adding book - Invalid year")
+
         elif choice == '2':
             list_books()
+
         elif choice == '3':
             title = input("Enter book title to search: ")
             if title == '':
                 print("Error searching for book - Input field empty")
             else:
                 search_book(title)
+
         elif choice == '4':
             title = input("Enter book title: ")
             author = input("Enter author name: ")
             year = input("Enter year of publication: ")
+            # If statements for checking against empty input fields
             if title == '' or author == '' or year == '':
                 print("Error deleting book - Input field empty")
             else:
                 delete_book(title, author, year)
+
         elif choice == '5':
             break
         else:
