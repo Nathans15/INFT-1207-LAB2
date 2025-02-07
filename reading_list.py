@@ -35,11 +35,14 @@ def delete_book(title, author, year):
             for row in reader:
                 if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
                     copy_found = True
+                else:
+                    books.append(row)
+                    print(books)
 
             if copy_found:
                 with open('books.csv', mode='w', newline=''):
                     writer = csv.writer(file)
-                    writer.writerows(books)
+                    writer.writerow(books)
                     print("Book Removed Successfully")
             else:
                 print("Book not found")
