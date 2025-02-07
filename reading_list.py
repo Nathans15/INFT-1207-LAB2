@@ -14,9 +14,10 @@ def add_book(title, author, year):
                 if duplicate_found:
                     print("Duplicate book found - Error adding books")
                 else:
-                    with open('books.csv', mode='a', newline=''):
+                    with open('books.csv', mode='a', newline='') as file:
                         writer = csv.writer(file)
                         writer.writerow([title, author, year])
+                        #file.write(email.encode('utf-8', 'ignore'))
         except FileNotFoundError:
             print("Error adding books")
             sys.exit()
