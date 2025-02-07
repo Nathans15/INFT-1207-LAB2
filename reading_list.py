@@ -30,11 +30,13 @@ def delete_book(title, author, year):
     books = []
     copy_found = False
     try:
+        # Read book file to check for a copy of a book
         with open('books.csv', mode='r', newline='') as file:
             reader = csv.reader(file)
             for row in reader:
                 if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
                     copy_found = True
+                    # Append other books
                 else:
                     books.append(row)
                     print(books)
@@ -42,7 +44,8 @@ def delete_book(title, author, year):
             if copy_found:
                 with open('books.csv', mode='w', newline='') as file:
                     writer = csv.writer(file)
-                    writer.writerows(books)  # Write the remaining books to the file
+                    # Write remaining books back to the file
+                    writer.writerows(books)
                 print("Book Removed Successfully")
             else:
                 print("Book not found")
