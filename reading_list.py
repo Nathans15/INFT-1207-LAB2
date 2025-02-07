@@ -33,7 +33,7 @@ def delete_book(title, author, year):
         with open('books.csv', mode='r', newline='') as file:
             reader = csv.reader(file)
             for row in reader:
-                if title == row[0] and author == row[1] and year == row[2]:
+                if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
                     copy_found = True
 
             if copy_found:
