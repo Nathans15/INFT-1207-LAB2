@@ -5,20 +5,22 @@ import sys
 def add_book(title, author, year):
         duplicate_found = False
         try:
+            # Open file in read mode to check for duplicates
             with open('books.csv', mode='r', newline='') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    if title == row[0] and author == row[1] and year == row[2]:
+                    if len(row) == 3 and title == row[0] and author == row[1] and year == row[2]:
                         duplicate_found = True
 
-                if duplicate_found:
-                    print("Duplicate book found - Error adding books")
-                else:
-                    with open('books.csv', mode='a', newline='') as file:
-                        writer = csv.writer(file)
-                        writer.writerow([title, author, year])
+            # If no duplicate found, append the new book
+            if duplicate_found:
+                print("Duplicate book found - Error adding books")
+            else:
+                with open('books.csv', mode='a', newline='') as file:  # Open in append mode
+                    writer = csv.writer(file)
+                    writer.writerow([title, author, year])
         except FileNotFoundError:
-            print("Error adding books")
+            print("Error: 'books.csv' not found.")
             sys.exit()
 
 #TODO: Write a "delete_book" function
