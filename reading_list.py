@@ -19,6 +19,7 @@ def add_book(title, author, year):
                 with open('books.csv', mode='a', newline='') as file:  # Open in append mode
                     writer = csv.writer(file)
                     writer.writerow([title, author, year])
+                    print("Added Book Successfully")
         except FileNotFoundError:
             print("Error: 'books.csv' not found.")
             sys.exit()
