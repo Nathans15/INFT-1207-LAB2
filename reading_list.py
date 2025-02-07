@@ -39,7 +39,9 @@ def delete_book(title, author, year):
                 print("Book Removed Successfully")
             else:
                 print("Book not found")
-
+    except FileNotFoundError:
+        print("Error adding books")
+        sys.exit()
 
 
 
