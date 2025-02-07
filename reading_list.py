@@ -24,13 +24,25 @@ def add_book(title, author, year):
 #TODO: Write a "delete_book" function
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
+    books = []
+    copy_found = False
     try:
-        with open('books.csv', mode='w') as file:
-            writer = csv.writer(file)
-            writer.deleterow([])
-    except FileNotFoundError:
-        print("Error adding books")
-        sys.exit()
+        with open('books.csv', mode='r', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if title == row[0] and author == row[1] and year == row[2]:
+                    copy_found = True
+
+            if copy_found:
+                with open('books.csv', mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerows(books)
+            print("Book Removed Successfully")
+        else:
+            print("Book not found")
+        except FileNotFoundError:
+            print("Error adding books")
+            sys.exit()
 
 
 
