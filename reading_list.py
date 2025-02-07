@@ -37,7 +37,7 @@ def delete_book(title, author, year):
                 with open('books.csv', mode='w', newline='') as file:
                     writer = csv.writer(file)
                     writer.writerows(books)
-            print("Book Removed Successfully")
+                    print("Book Removed Successfully")
             else:
                 print("Book not found")
 
