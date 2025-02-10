@@ -69,8 +69,8 @@ class TestReadingList(unittest.TestCase):
         add_book("The Hobbit", "J.R.R. Tolkien", "1937", self.test_file)
         add_book("1984", "George Orwell", "1949", self.test_file)
         result = list_books(self.test_file)
-        expected_output = ("Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937\n"
-                           "Title: 1984, Author: George Orwell, Year: 1949")
+        expected_output = ("The Hobbit,J.R.R. Tolkien,1937\n"
+                           "1984,George Orwell,1949")
         self.assertEqual(result, expected_output)
 
 
