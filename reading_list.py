@@ -19,8 +19,10 @@ def add_book(title, author, year):
         try:
             if title == '' or author == '' or year == '':
                 print("Error adding book - Input field empty")
+                return "Error adding book - Input field empty"
             elif int(year) <= 0 or CURRENT_YEAR < int(year):
                 print("Error adding book - Invalid year")
+                return "Error adding book - Invalid year"
             else:
                 try:
                     # Open file in read mode to check for duplicates
@@ -33,17 +35,20 @@ def add_book(title, author, year):
                     # If no duplicate found, append the new book
                     if duplicate_found:
                         print("Duplicate book found - Error adding books")
+                        return "Duplicate book found - Error adding books"
                     else:
                         with open('books.csv', mode='a', newline='') as file:  # Open in append mode
                             writer = csv.writer(file)
                             writer.writerow([title, author, year])
                             print("Added Book Successfully")
+                            return "Added Book Successfully"
                 except FileNotFoundError:
                     print("Error: 'books.csv' not found.")
                     sys.exit()
 
         except ValueError:
             print("Error adding book - Year must be numerical")
+            return "Error: adding book - Year must be numerical"
 
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
@@ -54,6 +59,7 @@ def delete_book(title, author, year):
     try:
         if title == '' or author == '' or year == '' or int(year) <= 0:
             print("Error adding book - Input field empty")
+            return "Error adding book - Input field empty"
         else:
             try:
                 # Read book file to check for a copy of a book
@@ -73,14 +79,17 @@ def delete_book(title, author, year):
                             # Write remaining books back to the file
                             writer.writerows(books)
                         print("Book Removed Successfully")
+                        return "Book Removed Successfully"
                     else:
                         print("Book not found - Error deleting book")
+                        return "Book not found - Error deleting book"
 
             except FileNotFoundError:
                 print("Error deleting books")
                 sys.exit()
     except ValueError:
         print("Error adding book - Invalid year")
+        return "Error adding book - Invalid year"
 
 
 
@@ -109,6 +118,7 @@ def search_book(title):
                         print(f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
                         return
                 print('Error finding book - Book not found')
+                return "Error finding book - Book not found"
     except FileNotFoundError:
         print("Error searching books")
     sys.exit()
