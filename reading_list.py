@@ -10,6 +10,8 @@ import time
 # Description: A library program that allows the user to add books,
 # delete them, search for a specific book and list the entire library.
 
+# Return statements under each error
+
 # Constant for the current year
 CURRENT_YEAR = time.localtime().tm_year
 
@@ -41,7 +43,6 @@ def add_book(title, author, year):
                             writer = csv.writer(file)
                             writer.writerow([title, author, year])
                             print("Added Book Successfully")
-                            return "Added Book Successfully"
                 except FileNotFoundError:
                     print("Error: 'books.csv' not found.")
                     sys.exit()

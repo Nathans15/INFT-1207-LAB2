@@ -20,7 +20,7 @@ class TestReadingList(unittest.TestCase):
         add_book("Moby Dick", "Herman Melville", 1851)
         with open(self.test_file, 'r') as file:
             books = file.readlines()
-        self.assertIn()
+        self.assertIn(add_book("Moby Dick", "Herman Melville", 1851) == "Duplicate book found - Error adding books")
         # TODO: The above should assert the associated error for duplicate books.
         # Check that duplicate books are not added
 
