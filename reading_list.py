@@ -117,7 +117,7 @@ def search_book(title):
                 for row in reader:
                     if row[0].lower() == title.lower():
                         print(f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
-                        return
+                        return f'Found - Title: {row[0]}, Author: {row[1]}, Year: {row[2]}'
                 print('Error finding book - Book not found')
                 return "Error finding book - Book not found"
     except FileNotFoundError:
