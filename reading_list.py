@@ -72,7 +72,6 @@ def delete_book(title, author, year):
                             # Append other books
                         else:
                             books.append(row)
-                            print(books)
 
                     if copy_found:
                         with open('books.csv', mode='w', newline='') as file:
@@ -104,7 +103,7 @@ def list_books():
     except FileNotFoundError:
         print("Error listing books - Books not found")
         sys.exit()
-
+    return "Books Listed"
 
 # Function to search for a book by title
 def search_book(title):
