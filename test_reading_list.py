@@ -64,7 +64,8 @@ class TestReadingList(unittest.TestCase):
         self.assertEqual(result, "Error finding book - Book not found")
 
     def test_list_books(self):
-        list_books()
+        result = list_books()
+        self.assertEqual(result)
 
 
 if __name__ == '__main__':
