@@ -4,7 +4,7 @@ import time
 # Time is imported for year-checking, to make sure the user
 # Cannot enter a year that hasn't been reached.
 
-# Date: February 7th, 2025
+# Date: February 9th, 2025
 # Authors: Spiro Kontossoros, Nathan Sheldrake
 # Student IDs: 100843569 (Kontossoros), 100964827 (Sheldrake)
 # Description: A library program that allows the user to add books,
