@@ -16,7 +16,7 @@ import time
 CURRENT_YEAR = time.localtime().tm_year
 
 # Function to add a book to the reading list
-def add_book(title, author, year):
+def add_book(title, author, year, file_name="books.csv"):
         duplicate_found = False
         try:
             if title == '' or author == '' or year == '':
