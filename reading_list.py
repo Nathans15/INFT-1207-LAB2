@@ -94,7 +94,7 @@ def delete_book(title, author, year):
 
 
 # Function to list all books
-def list_books():
+def list_books(file_name="books.csv"):
     try:
         with open('books.csv', mode='r') as file:
             reader = csv.reader(file)

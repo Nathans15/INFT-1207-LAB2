@@ -5,7 +5,7 @@ from reading_list import add_book, delete_book, list_books, search_book
 class TestReadingList(unittest.TestCase):
 
     def setUp(self):
-        # Set up a test CSV file and clear its contents before each test.
+        # Set up a CSV file and clear its contents before each test.
         self.test_file = "books.csv"
         with open(self.test_file, "w") as file:
             file.write("")
@@ -18,7 +18,7 @@ class TestReadingList(unittest.TestCase):
 
 
     def test_add_book_2(self):
-        add_book("Animal Farm", "George Orwell", "1949")
+        add_book("Animal Farm", "George Orwell", "1949", self.test_file)
         with open(self.test_file, 'r') as file:
             books = file.readlines()
         self.assertIn("Animal Farm,George Orwell,1949\n", books)
@@ -65,7 +65,13 @@ class TestReadingList(unittest.TestCase):
         self.assertEqual(result, "Error finding book - Book not found")
 
     def test_list_books(self):
-        self.assertIn(list_books())
+        # Test if listing books works correctly.
+        add_book("The Hobbit", "J.R.R. Tolkien", "1937", self.test_file)
+        add_book("1984", "George Orwell", "1949", self.test_file)
+        result = list_books(self.test_file)
+        expected_output = ("Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937\n"
+                           "Title: 1984, Author: George Orwell, Year: 1949")
+        self.assertEqual(result, expected_output)
 
 
 if __name__ == '__main__':
