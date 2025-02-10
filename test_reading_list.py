@@ -65,7 +65,7 @@ class TestReadingList(unittest.TestCase):
 
     def test_list_books(self):
         result = list_books()
-        self.assertEqual(result)
+        self.assertEqual(result, "List of Books")
 
 
 if __name__ == '__main__':

@@ -49,7 +49,7 @@ def add_book(title, author, year):
 
         except ValueError:
             print("Error adding book - Year must be numerical")
-            return "Error: adding book - Year must be numerical"
+            return "Error adding book - Year must be numerical"
 
 # Function to delete a book from the reading list
 def delete_book(title, author, year):
