@@ -100,7 +100,7 @@ def list_books(file_name="books.csv"):
         with open('books.csv', mode='r') as file:
             reader = csv.reader(file)
             for row in reader:
-                #print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
                 books.append(f"{row[0]},{row[1]},{row[2]}")
     except FileNotFoundError:
         print("Error listing books - Books not found")
