@@ -21,24 +21,24 @@ class TestReadingList(unittest.TestCase):
         # with open(self.test_file, 'r') as file:
         #     books = file.readlines()
 
-        self.assertTrue(add_book("Moby Dick", "Herman Melville", 1851) == "Duplicate book found - Error adding books")
+        self.assertIn(add_book("Moby Dick", "Herman Melville", 1851) == "Duplicate book found - Error adding books", "Error adding books")
         # TODO: The above should assert the associated error for duplicate books.
         # Check that duplicate books are not added
 
     def test_empty_field_error(self):
-        self.assertTrue(add_book("", "J.K. Rowling", "1997") == "Error adding book - Input field empty")
+        self.assertIn(str(add_book("", "J.K. Rowling", "1997")) == "Error adding book - Input field empty", "Input field empty")
         # Expect error message: "Error adding book - Input field empty"
 
     def test_invalid_year_error(self):
-        self.assertTrue(add_book("Dune", "Frank Herbert", "-2030") == "Error adding book - Invalid year")
+        self.assertIn(str(add_book("Dune", "Frank Herbert", "-2030")) == "Error adding book - Invalid year", "Invalid year")
         # Expect error message: "Error adding book - Invalid year"
 
     def test_invalid_year_error_2(self):
-        self.assertTrue(add_book("2084", "Jon Orwell", "2084"))
+        self.assertIn(str(add_book("2084", "Jon Orwell", "2084")) == "Error adding book - Invalid year", "Invalid year")
         # Expect error message: "Error adding book - Invalid year"
 
     def test_NaN_error(self):
-        self.assertTrue(add_book("Moby Dick", "Herman Melville", "Eighteen Fifty-One") == "Error adding book - Year must be numerical")
+        self.assertIn(str(add_book("Moby Dick", "Herman Melville", "Eighteen Fifty-One")) == "Error adding book - Year must be numerical", "Year must be numerical")
         # Expect error message: "Error adding book - Year must be numerical"
 
     def test_delete_book(self):
@@ -46,15 +46,15 @@ class TestReadingList(unittest.TestCase):
         # Validate that the book is removed
 
     def test_no_book_found_error(self):
-        self.assertTrue(delete_book("Nonexistent Book", "Unknown Author", "2020") == "Book not found - Error deleting book" )
+        self.assertIn(delete_book("Nonexistent Book", "Unknown Author", "2020") == "Book not found - Error deleting book", "Error deleting book")
         # Expect error message: "Book not found - Error deleting book"
 
     def test_search_book(self):
-        self.assertTrue(search_book("To Kill a Mockingbird") == "Found - Title: To Kill a Mockingbird, Author: Harper Lee, Year: 1960")
+        self.assertIn(search_book("To Kill a Mockingbird") == "Found - Title: To Kill a Mockingbird, Author: Harper Lee, Year: 1960", "Book found")
         # Expect: "Found - Title: To Kill a Mockingbird, Author: Harper Lee, Year: 1960"
 
     def test_search_not_found(self):
-        self.assertTrue(search_book("A Book That Doesn't Exist") == "Error finding book - Book not found")
+        self.assertIn(search_book("A Book That Doesn't Exist") == "Error finding book - Book not found", "Book not found")
         # Expect: "Error finding book - Book not found"
 
     def test_list_books(self):
