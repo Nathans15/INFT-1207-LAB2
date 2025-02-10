@@ -95,15 +95,20 @@ def delete_book(title, author, year):
 
 # Function to list all books
 def list_books(file_name="books.csv"):
+    books = []
     try:
         with open('books.csv', mode='r') as file:
             reader = csv.reader(file)
             for row in reader:
-                print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                #print(f'Title: {row[0]}, Author: {row[1]}, Year: {row[2]}')
+                books.append(f"{row[0]},{row[1]},{row[2]}")
     except FileNotFoundError:
         print("Error listing books - Books not found")
         sys.exit()
-    return "Books Listed"
+    if books:
+        return "\n".join(books)
+    else:
+        return "Books Listed"
 
 # Function to search for a book by title
 def search_book(title):
