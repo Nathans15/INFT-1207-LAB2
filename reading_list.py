@@ -59,8 +59,8 @@ def delete_book(title, author, year):
     copy_found = False
     try:
         if title == '' or author == '' or year == '' or int(year) <= 0:
-            print("Error adding book - Input field empty")
-            return "Error adding book - Input field empty"
+            print("Error removing book - Input field empty")
+            return "Error removing book - Input field empty"
         else:
             try:
                 # Read book file to check for a copy of a book
