@@ -3,21 +3,25 @@ from reading_list import add_book, delete_book, list_books, search_book
 
 
 class TestReadingList(unittest.TestCase):
-    def test_add_book(self):
+    def test_add_book_1(self):
         add_book("Moby Dick", "Herman Melville", 1851)
-        # Assert if the book is added (by manually checking CSV or creating validation logic)
-    def test_add_book(self):
-        add_book("Animal Farm", "George Orwell", 1949)
-
-    def test_add_book(self):
-        add_book("Moby Dick", "Herman Melville", "1851")
-        # Validate that the book is added
         with open(self.test_file, 'r') as file:
             books = file.readlines()
         self.assertIn("Moby Dick,Herman Melville,1851\n", books)
+        # Assert if the book is added (by manually checking CSV or creating validation logic)
+    def test_add_book_2(self):
+        add_book("Animal Farm", "George Orwell", 1949)
+        with open(self.test_file, 'r') as file:
+            books = file.readlines()
+        self.assertIn("Animal Farm,George Orwell,1949\n", books)
+        # Assert if another book is added
 
-    def test_add_book(self):
-        add_book("Animal Farm", "George Orwell", "1949")
+    def test_duplicate_error(self):
+        add_book("Moby Dick", "Herman Melville", 1851)
+        with open(self.test_file, 'r') as file:
+            books = file.readlines()
+        self.assertIn()
+        # TODO: The above should assert the associated error for duplicate books.
         # Check that duplicate books are not added
 
     def test_add_book(self):
