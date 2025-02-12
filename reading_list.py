@@ -100,8 +100,8 @@ def list_books(file_name="books.csv"):
     """List all books"""
     # For the sake of giving the function a text-based
     # output for test purposes
-    books_list = []
-    output=""
+    books_list = [] # Books list array
+    output="" # Text output for list of books
     try:
         with open('books.csv', mode='r') as file:
 
