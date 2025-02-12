@@ -90,8 +90,8 @@ def delete_book(title, author, year):
                 print("Error deleting books")
                 sys.exit()
     except ValueError:
-        print("Error adding book - Invalid year")
-        return "Error adding book - Invalid year"
+        print("Error removing book - Invalid year")
+        return "Error removing book - Invalid year"
 
 
 
